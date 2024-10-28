@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="#image.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快樂點蛋糕店 whosebirthday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: '微軟正黑體', sans-serif;
+            background: linear-gradient(135deg, #ffb6c1, #87ceeb);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #e91e63;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 80px;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 2em;
+        }
+
+        .about-section {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .feature-list {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-info .price {
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .contact-section {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 20px;
+        }
+
+        .contact-item h3 {
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .slide {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            user-select: none;
+            text-decoration: none;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .prev:hover, .next:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        footer {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                gap: 20px;
+                padding: 0 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 10px;
+                padding-top: 100px;
+            }
+
+            .about-section {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .feature-list {
+                flex-direction: column;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                height: 200px;
+            }
+
+            .slide img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="#home">首頁</a></li>
+            <li><a href="#about">關於我們</a></li>
+            <li><a href="#featured">熱門商品</a></li>
+            <li><a href="#products">所有產品</a></li>
+            <li><a href="#contact">聯絡方式</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="home">
+            <header>
+                <h1>快樂點蛋糕店 Whosebirthday</h1>
+            </header>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <h2 class="section-title">關於我們</h2>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>純手工製作</h3>
+                        <p>堅持傳統工藝</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>新鮮食材</h3>
+                        <p>嚴選頂級原料</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>客製化服務</h3>
+                        <p>專屬您的設計</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="image/cake07.png" alt="我們的故事">
+            </div>
+        </section>
+
+        <section id="featured">
+            <h2 class="section-title">熱門商品</h2>
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="image/cake01.png" alt="巧克力草莓蛋糕">
+                    <h3>巧克力草莓蛋糕</h3>
+                    <p>香濃巧克力配上新鮮草莓，完美的甜蜜搭配</p>
+                    <div class="price">NT$ 880</div>
+                </div>
+
+                <div class="slide">
+                    <img src="image/cake02.png" alt="彩虹水果蛋糕">
+                    <h3>彩虹水果蛋糕</h3>
+                    <p>繽紛水果點綴，清爽不膩口的完美選擇</p>
+                    <div class="price">NT$ 980</div>
+                </div>
+
+                <div class="slide">
+                    <img src="image/cake03.png" alt="提拉米蘇蛋糕">
+                    <h3>提拉米蘇蛋糕</h3>
+                    <p>經典義式風味，濃郁咖啡香與馬斯卡彭起司的絕配</p>
+                    <div class="price">NT$ 780</div>
+                </div>
+
+                <a class="prev" onclick="changeSlide(-1)">❮</a>
+                <a class="next" onclick="changeSlide(1)">❯</a>
+            </div>
+        </section>
+
+        <section id="products">
+            <h2 class="section-title">所有產品</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="image/cake04.png" alt="經典巧克力蛋糕">
+                    <div class="product-info">
+                        <h3>經典巧克力蛋糕</h3>
+                        <p>深度烘焙可可豆製成</p>
+                        <div class="price">NT$ 680</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="image/cake05.png" alt="抹茶紅豆蛋糕">
+                    <div class="product-info">
+                        <h3>抹茶紅豆蛋糕</h3>
+                        <p>日式風味的完美結合</p>
+                        <div class="price">NT$ 720</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="image/cake06.png" alt="藍莓乳酪蛋糕">
+                    <div class="product-info">
+                        <h3>藍莓乳酪蛋糕</h3>
+                        <p>濃郁乳酪搭配新鮮藍莓</p>
+                        <div class="price">NT$ 820</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">聯絡我們</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>營業時間</h3>
+                    <p>週一至週五: 10:00 - 21:00</p>
+                    <p>週六至週日: 09:00 - 21:30</p>
+                </div>
+                <div class="contact-item">
+                    <h3>聯絡資訊</h3>
+                    <p>電話: 02-XXXX-XXXX</p>
+                    <p>信箱: @example.com</p>
+                </div>
+                <div class="contact-item">
+                    <h3>門市地址</h3>
+                    <p>台北市XX區XX路XX號</p>
+                    <p>捷運XX站X號出口</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 快樂點蛋糕店 版權所有</p>
+        </footer>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            
+            if (n >= slides.length) {slideIndex = 0}
+            if (n < 0) {slideIndex = slides.length - 1}
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            
+            slides[slideIndex].classList.add("active");
+        }
+
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
